@@ -1,0 +1,102 @@
+form {
+    background-color: whitesmoke;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    max-width: 700px;
+    margin: auto;
+    box-shadow: 0 4px 6px 0 rgba(0,0,0,0.2);
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #343131;
+    font-size: 13px;
+}
+
+form input[type= "number"],
+form button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+form .form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+}
+
+form .form-grid label {
+    margin-bottom: 5px;
+}
+
+form .form-grid input {
+    margin-bottom: 15px;
+}
+
+form button{
+    grid-column: span 3;
+    width: auto;
+    padding: 10px 20px;
+    color: whitesmoke;
+    background-color: #343131;
+}
+
+form button:hover {
+ background-color: #D8A25E;
+}
+
+#resultPopup {
+    position: fixed;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: #ccc;
+    border: 1px solid #343131;
+    border-radius: 10px;
+    padding: 20px;
+    z-index: 1001;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+#loadingScreen {
+   display: none;
+   position: fixed;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: rgba(0,0,0,0.2);
+   z-index: 9999;
+}
+#loadingScreen div{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    color: white;
+    font-size: 20px;
+    text-align: center;
+}
+
+.loader {
+    border: 4px solid #f3f3f3;
+    border-radius: 50%;
+    border-top: 4px solid #3498db;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {transform:  rotate(0deg);}
+    100% {transform: rotate(360deg);}
+}
+

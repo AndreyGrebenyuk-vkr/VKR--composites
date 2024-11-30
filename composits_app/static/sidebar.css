@@ -1,0 +1,48 @@
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+.sidebar {
+    position: fixed;
+    width: 250;
+    height: 100%;
+    background-color: #343131;
+    color: whitesmoke;
+    overflow-y: auto;
+    padding: 20px;
+    box-shadow: 2px 0 5px 0 rgba(0,0,0,0.2);
+}
+
+.sidebar a {
+    text-decoration: none;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    margin: 10px 0;
+}
+
+.sidebar ul li a {
+    color: whitesmoke;
+    font-weight: 700;
+    display: block;
+    padding: 5px;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.sidebar ul li a:hover{
+    background-color: #D8A25E;
+}
+
+.content {
+    flex-grow: 1;
+    margin-left: 200px;
+    padding: 20px;
+    background-color: #fff;
+}

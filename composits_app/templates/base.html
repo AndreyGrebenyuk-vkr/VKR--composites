@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html lan="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>{% block title%}App{% endblock %}</title>   
+        <link rel="stylesheet" href="{{url_for('static', filename='sidebar.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    </head>
+    <body>
+        <div class="layout">
+            <aside class = "sidebar">   
+                <ul>
+                    <li><a href="{{url_for('home')}}">Конечные свойства</a></li>
+                    <li><a href="{{url_for('about')}}">О работе</a></li>
+                </ul>
+            </aside>
+
+            <main class ="content">
+                {% block content %} {% endblock %}
+                {% block javascript %} {% endblock %}
+            </main>
+        </div>
+    </body>
+</html>

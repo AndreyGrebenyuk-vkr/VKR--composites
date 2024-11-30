@@ -1,0 +1,126 @@
+{% extends "base.html" %}
+
+{% block title %}Home page{% endblock %}
+
+
+    
+{% block content %}
+<h1 style="color: #333;">Предсказание конечных свойств копозиционных материалов</h1>
+
+<form id="predictionform">
+    <div class = "form-grid">
+        <div>
+            <label>Соотношение матрица-наполнитель</label>
+            <input required name="matrix_filler_ratio" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Плотность, кг/м3</label>
+            <input required name="density" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Модуль упругости, ГПа</label>
+            <input required name="elasticity_modulus" type="number" step="0.00001">
+        </div>
+        
+        <div>
+            <label>Количество отвердителя, м.%</label>
+            <input required name="hardener_amount" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Содержание эпоксидных групп,%_2</label>
+            <input required name="epoxy_groups_amount" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Температура вспышки, С_2</label>
+            <input required name="flash_point" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Поверхностная плотность, г/м2</label>
+            <input required name="surface_density" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Потребление смолы, г/м2</label>
+            <input required name="resin_consumption" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Угол нашивки, град</label>
+            <input required name="patch_angle" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Шаг нашивки</label>
+            <input required name="patch_pitch" type="number" step="0.00001">
+        </div>
+
+        <div>
+            <label>Плотность нашивки</label>
+            <input required name="patch_density" type="number" step="0.00001">
+        </div>
+
+        <button type="submit">Предсказать</button>
+    </div>
+</form>
+
+<div id="loadingScreen" style="display: none;">
+    <div class="loader">
+        
+    </div>
+</div>
+
+<div id="resultPopup" style="display: none;">
+    <div class="popup">
+        <div id="resultContainer"></div>
+        <button onclick="closePopup()">Закрыть</button>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+    
+        const form = document.getElementById("predictionform");
+        const resultPopup = document.getElementById("resultPopup");
+        const resutContainer = document.getElementById("resultContainer");
+        const loadingScreen = document.getElementById("loadingScreen");
+
+        
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            loadingScreen.style.display = 'block';
+
+            const formData = new FormData(form);
+            const data = Object.fromEntries(formData.entries());
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers:{'Content-Type': 'application/x-www-form-urlencoded'},
+                body: new URLSearchParams(data)
+            });           
+            
+            const result =  await response.json();
+            
+            resutContainer.innerHTML = `
+            <p><strong>Модуль упругости при растяжении: </strong>${result.tensile_modulus_of_elasticity}</p>
+            <p><strong>Прочность при растяжении: </strong>${result.tensile_strength}</p>
+            `;
+            loadingScreen.style.display = 'none';
+            resultPopup.style.display = "block";
+
+            
+        });
+    
+
+    function closePopup() {
+        resultPopup.style.display = 'none';
+    }
+</script>
+{% endblock %}
